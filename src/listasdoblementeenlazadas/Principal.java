@@ -136,7 +136,7 @@ public class Principal {
         linea2d.setLineaSiguiente(linea8c);
         Lineas linea9b = new Lineas(9);
         linea8c.setLineaSiguiente(linea9b);
-        saltoDelAgua.setSig(chabacano);
+        pinoSuarez.setSig(chabacano);
 
         Transbordes ermita = new Transbordes("Ermita");
         Lineas linea2e = new Lineas(2);
@@ -473,7 +473,7 @@ public class Principal {
         linea2c.setEstaciones(Linea2);
         linea2d.setEstaciones(Linea2);
         linea2e.setEstaciones(Linea2);
-
+        
         linea9.setEstaciones(Linea9);
         linea9a.setEstaciones(Linea9);
         linea9b.setEstaciones(Linea9);
@@ -503,7 +503,7 @@ public class Principal {
         linea5e.setEstaciones(Linea5);
         
         linea4.setEstaciones(Linea4);
-        linea4.setEstaciones(Linea4);
+        linea4f.setEstaciones(Linea4);
         linea4b.setEstaciones(Linea4);
         linea4c.setEstaciones(Linea4);
         linea4d.setEstaciones(Linea4);
@@ -522,11 +522,11 @@ public class Principal {
         
         linea11.setEstaciones(LineaA);
         OperacionesTransbordes operaciones = new OperacionesTransbordes(elRosario);
-        operaciones.mostrarTransbordes();
+       operaciones.caso2(6, 2, "Tezozomoc","Cuitlahuac");
+       // operaciones.mostrarTransbordes();
 //        
-        operaciones.getTrasbordesPorlinea(9);
 //        
-        operaciones.distanciaATransbordes(8, "Aculco");
+     //   operaciones.distanciaATransbordes(8, "Aculco");
 
 //
 //          listita.mostrarDatos();
