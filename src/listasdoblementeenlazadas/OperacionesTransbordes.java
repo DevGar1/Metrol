@@ -93,7 +93,6 @@ public class OperacionesTransbordes {
         while (aux != null) {
             aux2 = aux.getLinea();
             while (aux2 != null) {
-                System.out.println(aux2.getNlinea());
                 if (aux2.getNlinea() == lineaDeseada) {
                     transb.add(aux.getNombreEstacion());
                 }
@@ -110,8 +109,11 @@ public class OperacionesTransbordes {
         NodoDoble estaciones = this.getEstaciones(linea);
         ArrayList<String> trans = this.getTrasbordesPorlinea(linea);
         trans.forEach(dato->{
-            System.out.println(this.DistanciaNodos(a, dato, estaciones));
-        });
+            System.out.println(this.DistanciaNodos(a, dato, estaciones) - 1);
+        }); 
+    }
+    
+    public void segundaLinea(int linea){
         
     }
 }

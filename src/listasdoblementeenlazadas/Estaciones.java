@@ -39,7 +39,6 @@ public class Estaciones {
 
     //Metodo para saber cuando la lista esta vacia
     public boolean estaVacia() {
-
         return inicio == null;
     }
 
