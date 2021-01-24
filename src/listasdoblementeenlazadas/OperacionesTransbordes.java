@@ -49,8 +49,6 @@ public class OperacionesTransbordes {
                 aux1 = aux1.getLineaSiguiente();
             }
             aux = aux.getSig();
-            System.out.println("");
-            System.out.println("");
         }
         return null;
     }
@@ -182,11 +180,80 @@ public class OperacionesTransbordes {
 
     }
 
-    public void recursividad(int lineaBase, int lineaLegada, int intento) {
+    public String Caso2(int lineaBase, int lineaLlegada, String salida, String estacionLlegada) {
         ArrayList<String> transbordesa = this.getTrasbordesPorlinea(lineaBase);// tenemos
-        ArrayList<String> transbordesb = this.getTrasbordesPorlinea(lineaLegada);// necesitamos
-        
-        
+        ArrayList<String> transbordesb = this.getTrasbordesPorlinea(lineaLlegada);// necesitamos
+        String nombreM = null;
+
+        boolean flag = false;
+        ArrayList<String> opciones = new ArrayList();
+        for (int i = 0; i < transbordesa.size(); i++) {
+            System.out.println(transbordesa.get(i));
+            for (int j = 0; j < transbordesb.size(); j++) {
+
+                if (transbordesa.get(i) == transbordesb.get(j)) {
+                    opciones.add(transbordesa.get(i));
+                    break;
+                }
+            }
+        }
+        int mejor = 1000;
+        nombreM = null;
+        Transbordes aux = this.transbordes;
+        for (int i = 0; i < opciones.size(); i++) {
+
+            int distancia = this.DistanciaNodos(salida, opciones.get(i), this.getEstaciones(lineaBase));
+            if (distancia < mejor) {
+                mejor = distancia;
+                nombreM = opciones.get(i);
+            }
+        }
+
+        return nombreM;
+    }
+
+    public ArrayList<String> Caso1(String d1, String d2, int linea, boolean transborde) {
+        NodoDoble aux = this.getEstaciones(linea);
+        while (aux != null) {
+            if (aux.dato.equals(d1)) {
+                break;
+            }
+            aux = aux.siguiente;
+        }
+        ArrayList<String> obj = new ArrayList();
+        NodoDoble aux2 = aux;
+        boolean ida = false;
+        while (aux != null) {
+            if (obj.size() == 0 && transborde) {
+                obj.add("Transborda a linea " + linea);
+            }
+            obj.add(aux.dato);
+
+            if (aux.dato.equals(d2)) {
+                break;
+            }
+
+            if (ida == false) {
+                aux = aux.siguiente;
+                if (aux == null) {
+                    aux = aux2;
+                    ida = true;
+                    obj.clear();
+                }
+            } else {
+                aux = aux.anterior;
+            }
+
+        }
+        return obj;
+    }
+
+    public ArrayList<String> llamarCaso2(int linea1, int linea2, String estacion1, String estacion2) {
+        String medioPaso = this.Caso2(linea1, linea2, estacion1, estacion2);
+        ArrayList<String> caminitoDeLaEscuela = this.Caso1(estacion1, medioPaso, linea1, false);
+        caminitoDeLaEscuela.addAll(this.Caso1(medioPaso, estacion2, linea2, true));
+        System.out.println(caminitoDeLaEscuela);
+        return caminitoDeLaEscuela;
 
     }
 
@@ -199,15 +266,11 @@ public class OperacionesTransbordes {
 
         int distanciaPrimeros = 1000;
         for (int i = 0; i < transbordesa.size(); i++) {
-            System.out.println("=-----------------------------------------------------------------------------");
-            System.out.println(transbordesa.get(i));
             int a = this.DistanciaNodos(estacion1, transbordesa.get(i), this.getEstaciones(linea1)) - 1;
             System.out.println(a);
 
             algo = this.transbordar(linea1, transbordesa.get(i), transbordesb);
             int intento = (int) algo.get(1) + distanciaPrimeros;
-            System.out.println("intento es");
-            System.out.println(intento);
             if (lomejotNum > intento) {
                 lomejotNum = intento;
                 lomejorNombre = (String) algo.get(0);

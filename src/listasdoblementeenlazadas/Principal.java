@@ -73,19 +73,19 @@ public class Principal {
         linea3c.setLineaSiguiente(linea2a);
         balderas.setSig(hidalgo);
 
-        Transbordes buenavista = new Transbordes("Buenavista");
+        Transbordes guerrero = new Transbordes("Guerrero");
         Lineas linea3d = new Lineas(3);
-        buenavista.setLinea(linea3d);
+        guerrero.setLinea(linea3d);
         Lineas linea10 = new Lineas(10);
         linea3d.setLineaSiguiente(linea10);
-        hidalgo.setSig(buenavista);
+        hidalgo.setSig(guerrero);
 
         Transbordes laRaza = new Transbordes("La Raza");
         Lineas linea3e = new Lineas(3);
         laRaza.setLinea(linea3e);
         Lineas linea5 = new Lineas(5);
         linea3e.setLineaSiguiente(linea5);
-        buenavista.setSig(laRaza);
+        guerrero.setSig(laRaza);
 
         Transbordes deportivo = new Transbordes("Deportivo 18 de Marzo");
         Lineas linea3f = new Lineas(3);
@@ -177,7 +177,7 @@ public class Principal {
         Lineas linea10b = new Lineas(10);
         morelos.setLinea(linea10b);
         Lineas linea4d = new Lineas(4);
-        linea10.setLineaSiguiente(linea4d);
+        linea10b.setLineaSiguiente(linea4d);
         candelaria.setSig(morelos);
 
         Transbordes sanLazaro = new Transbordes("San Lazaro");
@@ -270,27 +270,7 @@ public class Principal {
         Linea1.InsertarInicio("Zaragoza");
         Linea1.InsertarInicio("Pantitlan");
 
-        Linea1.InsertarInicio("Observatorio");
-        Linea1.InsertarInicio("Tacubaya");
-        Linea1.InsertarInicio("Juanacatlan");
-        Linea1.InsertarInicio("Chapultepec");
-        Linea1.InsertarInicio("Sevilla");
-        Linea1.InsertarInicio("Insurgentes");
-        Linea1.InsertarInicio("Cuauhtemoc");
-        Linea1.InsertarInicio("Balderas");
-        Linea1.InsertarInicio("Salto del Agua");
-        Linea1.InsertarInicio("Isabel la Catolica");
-        Linea1.InsertarInicio("Pino Suarez");
-        Linea1.InsertarInicio("Merced");
-        Linea1.InsertarInicio("Candelaria");
-        Linea1.InsertarInicio("San Lazaro");
-        Linea1.InsertarInicio("Moctezuma");
-        Linea1.InsertarInicio("Balbuena");
-        Linea1.InsertarInicio("Boulevard Pto. Aereo");
-        Linea1.InsertarInicio("Gomez Farias");
-        Linea1.InsertarInicio("Zaragoza");
-        Linea1.InsertarInicio("Pantitlan");
-
+        Linea2.InsertarInicio("Cuatro Caminos");
         Linea2.InsertarInicio("Panteones");
         Linea2.InsertarInicio("Tacuba");
         Linea2.InsertarInicio("Cuitlahuac");
@@ -315,6 +295,7 @@ public class Principal {
         Linea2.InsertarInicio("General Anaya");
         Linea2.InsertarInicio("Tasqueña");
 
+        Linea3.InsertarInicio("Indios Verdes");
         Linea3.InsertarInicio("Deportivo 18 de Marzo");
         Linea3.InsertarInicio("Potrero");
         Linea3.InsertarInicio("La Raza");
@@ -335,6 +316,7 @@ public class Principal {
         Linea3.InsertarInicio("Copilco");
         Linea3.InsertarInicio("Universidad");
 
+        Linea4.InsertarInicio("Martin Carrera");
         Linea4.InsertarInicio("Talisman");
         Linea4.InsertarInicio("Bondojito");
         Linea4.InsertarInicio("Consulado");
@@ -345,6 +327,7 @@ public class Principal {
         Linea4.InsertarInicio("Jamaica");
         Linea4.InsertarInicio("Santa Anita");
 
+        Linea5.InsertarInicio("Politecnico");
         Linea5.InsertarInicio("Instituto del Petroleo");
         Linea5.InsertarInicio("Autobuses del Norte");
         Linea5.InsertarInicio("La Raza");
@@ -357,7 +340,7 @@ public class Principal {
         Linea5.InsertarInicio("Terminal Aerea");
         Linea5.InsertarInicio("Hangares");
         Linea5.InsertarInicio("Pantitlan");
-
+        Linea7.InsertarInicio("El Rosario");
         Linea7.InsertarInicio("Aquiles Serdan");
         Linea7.InsertarInicio("Camarones");
         Linea7.InsertarInicio("Refineria");
@@ -372,6 +355,7 @@ public class Principal {
         Linea7.InsertarInicio("Mixcoac");
         Linea7.InsertarInicio("Barranca del Muerto");
 
+        Linea8.InsertarInicio("Garibaldi");
         Linea8.InsertarInicio("Bellas Artes");
         Linea8.InsertarInicio("San Juan de Letran");
         Linea8.InsertarInicio("Salto del Agua");
@@ -391,6 +375,7 @@ public class Principal {
         Linea8.InsertarInicio("UAM I");
         Linea8.InsertarInicio("Constitucion de 1917");
 
+        Linea9.InsertarInicio("Tacubaya");
         Linea9.InsertarInicio("Patriotismo");
         Linea9.InsertarInicio("Chilpancingo");
         Linea9.InsertarInicio("Centro Medico");
@@ -403,6 +388,7 @@ public class Principal {
         Linea9.InsertarInicio("Puebla");
         Linea9.InsertarInicio("Pantitlan");
 
+        LineaA.InsertarInicio("Pantitlan");
         LineaA.InsertarInicio("Agricola Oriental");
         LineaA.InsertarInicio("Canal de San Juan");
         LineaA.InsertarInicio("Tepalcates");
@@ -413,6 +399,7 @@ public class Principal {
         LineaA.InsertarInicio("Los Reyes");
         LineaA.InsertarInicio("La Paz");
 
+        LineaB.InsertarInicio("Buenavista");
         LineaB.InsertarInicio("Guerrero");
         LineaB.InsertarInicio("Garibaldi");
         LineaB.InsertarInicio("Lagunilla");
@@ -433,27 +420,6 @@ public class Principal {
         LineaB.InsertarInicio("Olimpica");
         LineaB.InsertarInicio("Plaza Aragon");
         LineaB.InsertarInicio("Ciudad Azteca");
-        
-        Linea12.InsertarInicio("Mixcoac");
-        Linea12.InsertarInicio("Insurgentes Sur");
-        Linea12.InsertarInicio("Hospital 20 de Noviembre");
-        Linea12.InsertarInicio("Zapata");
-        Linea12.InsertarInicio("Parque de los Venados");
-        Linea12.InsertarInicio("Eje Central");
-        Linea12.InsertarInicio("Ermita");
-        Linea12.InsertarInicio("Mexicaltzingo");
-        Linea12.InsertarInicio("Atlalilco");
-        Linea12.InsertarInicio("Culhuacan");
-        Linea12.InsertarInicio("San Andres Tomaltlan");
-        Linea12.InsertarInicio("Lomas Estrella");
-        Linea12.InsertarInicio("Calle 11");
-        Linea12.InsertarInicio("Periferico Ote");
-        Linea12.InsertarInicio("Tezonco");
-        Linea12.InsertarInicio("Olivos");
-        Linea12.InsertarInicio("Nopalera");
-        Linea12.InsertarInicio("Zapotitlan");
-        Linea12.InsertarInicio("Tlaltenco");
-        Linea12.InsertarInicio("Tlahuac");
 
         linea8.setEstaciones(Linea8);
         linea8a.setEstaciones(Linea8);
@@ -473,7 +439,7 @@ public class Principal {
         linea2c.setEstaciones(Linea2);
         linea2d.setEstaciones(Linea2);
         linea2e.setEstaciones(Linea2);
-        
+
         linea9.setEstaciones(Linea9);
         linea9a.setEstaciones(Linea9);
         linea9b.setEstaciones(Linea9);
@@ -487,46 +453,46 @@ public class Principal {
         linea1d.setEstaciones(Linea1);
         linea1e.setEstaciones(Linea1);
         linea1f.setEstaciones(Linea1);
-        
+
         linea3.setEstaciones(Linea3);
         linea3a.setEstaciones(Linea3);
         linea3b.setEstaciones(Linea3);
         linea3c.setEstaciones(Linea3);
         linea3d.setEstaciones(Linea3);
         linea3e.setEstaciones(Linea3);
-        linea3f.setEstaciones(Linea3);    
-        
+        linea3f.setEstaciones(Linea3);
+
         linea5.setEstaciones(Linea5);
         linea5a.setEstaciones(Linea5);
         linea5b.setEstaciones(Linea5);
         linea5c.setEstaciones(Linea5);
         linea5e.setEstaciones(Linea5);
-        
+
         linea4.setEstaciones(Linea4);
-        linea4f.setEstaciones(Linea4);
         linea4b.setEstaciones(Linea4);
         linea4c.setEstaciones(Linea4);
         linea4d.setEstaciones(Linea4);
         linea4e.setEstaciones(Linea4);
-        
+        linea4f.setEstaciones(Linea4);
+
         linea10.setEstaciones(LineaB);
         linea10a.setEstaciones(LineaB);
         linea10b.setEstaciones(LineaB);
         linea10c.setEstaciones(LineaB);
         linea10d.setEstaciones(LineaB);
-        
+
         linea12.setEstaciones(Linea12);
         linea12a.setEstaciones(Linea12);
         linea12b.setEstaciones(Linea12);
         linea12c.setEstaciones(Linea12);
-        
+
         linea11.setEstaciones(LineaA);
         OperacionesTransbordes operaciones = new OperacionesTransbordes(elRosario);
-       operaciones.caso2(6, 2, "Tezozomoc","Cuitlahuac");
-       // operaciones.mostrarTransbordes();
+        operaciones.llamarCaso2(4, 10, "Martin Carrera", "San Lazaro");
+        // operaciones.mostrarTransbordes();
 //        
 //        
-     //   operaciones.distanciaATransbordes(8, "Aculco");
+        //   operaciones.distanciaATransbordes(8, "Aculco");
 
 //
 //          listita.mostrarDatos();
