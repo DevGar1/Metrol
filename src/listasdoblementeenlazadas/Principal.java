@@ -297,7 +297,7 @@ public class Principal {
         Linea2.InsertarInicio("Portales");
         Linea2.InsertarInicio("Ermita");
         Linea2.InsertarInicio("General Anaya");
-        Linea2.InsertarInicio("Tasqueña");
+        Linea2.InsertarInicio("Tasquena");
 
         Linea3.InsertarInicio("Indios Verdes");
         Linea3.InsertarInicio("Deportivo 18 de Marzo");
@@ -496,7 +496,6 @@ public class Principal {
         Scanner entradaEnteros = new Scanner(System.in);
         int lineaInicio, lineaFinal;
         String estacion1, estacion2;
-        operaciones.recursivo(8, 2, "constitucion de 1917", "hidalgo", 2);
 
         System.out.println("---------------------------------¿A dónde vamos hoy?---------------------------------");
         System.out.println("Ingresa linea de inicio");
@@ -514,20 +513,28 @@ public class Principal {
 
         } else {
             ArrayList<Object> obj = operaciones.recursivo(lineaInicio, lineaFinal, estacion1, estacion2, 2);
+            System.out.println(obj);
             if (obj.size() == 3) {
                 movimientos = operaciones.Caso1(estacion1, (String) obj.get(1), lineaInicio, false);
                 ArrayList<String> aux = operaciones.Caso1((String) obj.get(1), (String) obj.get(2), lineaFinal, false);
-
+                movimientos.add("Transborda a la linea " + (lineaFinal));
                 for (int i = 0; i < aux.size(); i++) {
                     movimientos.add(aux.get(i));
                 }
 
             } else {
+
                 movimientos = operaciones.Caso1(estacion1, (String) obj.get(1), lineaInicio, false);
+                System.out.println("por el momento");
+                System.out.println(movimientos);
                 ArrayList<String> aux = operaciones.Caso1((String) obj.get(1), (String) obj.get(3), (int) obj.get(2), false);
+                movimientos.add("Transborda a la linea " + obj.get(2));
+
                 for (int i = 0; i < aux.size(); i++) {
                     movimientos.add(aux.get(i));
                 }
+                movimientos.add("Transborda a la linea " + lineaFinal);
+
                 aux = operaciones.Caso1((String) obj.get(3), estacion2, lineaFinal, false);
                 for (int i = 0; i < aux.size(); i++) {
                     movimientos.add(aux.get(i));

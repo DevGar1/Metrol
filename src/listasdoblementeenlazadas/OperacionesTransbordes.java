@@ -336,9 +336,7 @@ public class OperacionesTransbordes {
         NodoDoble aux2 = aux;
         boolean ida = false;
         while (aux != null) {
-            if (obj.size() == 0 && transborde) {
-                obj.add("Transborda a linea " + linea);
-            }
+
             obj.add(aux.dato);
 
             if (aux.dato.equalsIgnoreCase(d2)) {
@@ -351,6 +349,7 @@ public class OperacionesTransbordes {
                     aux = aux2;
                     ida = true;
                     obj.clear();
+
                 }
             } else {
                 aux = aux.anterior;
@@ -369,10 +368,9 @@ public class OperacionesTransbordes {
 
     public ArrayList<Object> recursivo(int linea1, int linea2, String estacion1, String estacion2, int intentos) {
         String medioPaso = this.Caso3(linea1, linea2, estacion1, estacion2, intentos, 0, null, 0);
- 
+
         ArrayList<String> caminitoDeLaEscuela = this.Caso1(estacion1, medioPaso, linea1, false);
         caminitoDeLaEscuela.addAll(this.Caso1(medioPaso, estacion2, linea2, true));
-        System.out.println(this.nombres);
         return this.nombres;
     }
 
