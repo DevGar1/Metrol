@@ -217,7 +217,7 @@ public class OperacionesTransbordes {
         return lineasPosibles;
     }
 
-    public String Caso3(int lineaBase, int lineaLlegada, String salida, String estacionLlegada, int intentos) {
+    public String Caso3(int lineaBase, int lineaLlegada, String salida, String estacionLlegada, int intentos, int valorActual) {
         System.out.println("----------------------------------------------------------------------------------------------------");
         ArrayList<String> transbordesa = this.getTrasbordesPorlinea(lineaBase);// tenemos
         ArrayList<String> transbordesb = this.getTrasbordesPorlinea(lineaLlegada);// necesitamos
@@ -242,17 +242,13 @@ public class OperacionesTransbordes {
 
                     if (lineas.get(j).getNlinea() == lineaLlegada) {
                         ArrayList<String> camino = this.llamarCaso2(lineaBase, lineaLlegada, salida, estacionLlegada);
-                        System.out.println(camino);
                         int tam = camino.size() - 4;
-                        System.out.println(tam);
-                        if (((int)this.nombres.get(0)) != 100) {
-                            tam = tam + (int) this.nombres.get(0);
-                        }
-                        System.out.println(tam);
-                        if ((int) this.nombres.get(0) > tam) {
 
+                        tam = tam + valorActual;
+                        if ((int) this.nombres.get(0) > tam) {
+                            this.nombres.clear();
                             this.distancia = tam;
-                            this.nombres.set(0, this.distancia);
+                            this.nombres.add(this.distancia);
                             this.nombres.add(transborde.NombreEstacion);
                             this.nombres.add(estacionLlegada);
                         }
@@ -264,8 +260,8 @@ public class OperacionesTransbordes {
                 if (!esCaso2) {
                     for (int j = 0; j < lineas.size(); j++) {
                         if (lineas.get(j).getNlinea() != lineaBase) {
-
-                            String res = this.Caso3(lineas.get(j).getNlinea(), lineaLlegada, transborde.getNombreEstacion(), estacionLlegada, intentos - 1);
+                            int a = this.DistanciaNodos(salida, transborde.getNombreEstacion(), this.getEstaciones(lineaBase));
+                            String res = this.Caso3(lineas.get(j).getNlinea(), lineaLlegada, transborde.getNombreEstacion(), estacionLlegada, intentos - 1, a);
                             if (res != null) {
                                 System.out.println("Es algo");
 
@@ -508,7 +504,7 @@ public class OperacionesTransbordes {
     }
 
     public ArrayList<String> recursivo(int linea1, int linea2, String estacion1, String estacion2, int intentos) {
-        String medioPaso = this.Caso3(linea1, linea2, estacion1, estacion2, intentos);
+        String medioPaso = this.Caso3(linea1, linea2, estacion1, estacion2, intentos, 0);
         ArrayList<String> caminitoDeLaEscuela = this.Caso1(estacion1, medioPaso, linea1, false);
         caminitoDeLaEscuela.addAll(this.Caso1(medioPaso, estacion2, linea2, true));
         return caminitoDeLaEscuela;

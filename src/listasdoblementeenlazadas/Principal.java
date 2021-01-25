@@ -490,7 +490,7 @@ public class Principal {
 
         linea11.setEstaciones(LineaA);
         OperacionesTransbordes operaciones = new OperacionesTransbordes(elRosario);
-        operaciones.recursivo(2, 6, "revolucion", "la villa",3);
+        operaciones.recursivo(8, 5, "Constitucion de 1917", "La Raza",2);
        // operaciones.mostrarTransbordes();
 //        
 //        
