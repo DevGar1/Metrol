@@ -209,8 +209,8 @@ public class OperacionesTransbordes {
         return lineasPosibles;
     }
 
-    public String Caso3(int lineaBase, int lineaLlegada, String salida, String estacionLlegada, int intentos, int valorActual, String tSalida) {
-        System.out.println("----------------------------------------------------------------------------------------------------");
+    public String Caso3(int lineaBase, int lineaLlegada, String salida,
+            String estacionLlegada, int intentos, int valorActual, String tSalida, int paso) {
         ArrayList<String> transbordesa = this.getTrasbordesPorlinea(lineaBase);// tenemos
         ArrayList<String> transbordesb = this.getTrasbordesPorlinea(lineaLlegada);// necesitamos
         ArrayList<String> opciones = new ArrayList();
@@ -236,33 +236,27 @@ public class OperacionesTransbordes {
                         this.nombres.add(this.distancia);
                         if (tSalida != null) {
                             this.nombres.add(tSalida);
+                            this.nombres.add(paso);
                         }
                         this.nombres.add(transborde.NombreEstacion);
                         this.nombres.add(estacionLlegada);
                     }
-                    System.out.println(this.nombres);
                     esCaso2 = true;
-                    return "Final";
+                    return null;
                 }
             }
             if (!esCaso2) {
                 for (int j = 0; j < lineas.size(); j++) {
                     if (lineas.get(j).getNlinea() != lineaBase) {
                         int a = this.DistanciaNodos(salida, transborde.getNombreEstacion(), this.getEstaciones(lineaBase));
-                        String res = this.Caso3(lineas.get(j).getNlinea(),
+                        this.Caso3(lineas.get(j).getNlinea(),
                                 lineaLlegada, transborde.getNombreEstacion(),
-                                estacionLlegada, intentos - 1, a, transborde.getNombreEstacion());
-                        if (res != null) {
-                            System.out.println("Es algo");
+                                estacionLlegada, intentos - 1, a, transborde.getNombreEstacion(), lineas.get(j).getNlinea());
 
-                        }
                     }
                 }
-
             }
         }
-        System.out.println("lo mejor fuie");
-        System.out.println(this.nombres);
         return null;
     }
 
@@ -327,14 +321,13 @@ public class OperacionesTransbordes {
                 aux = aux.anterior;
             }
         }
-        System.out.println(h);
         return h;
     }
 
     public ArrayList<String> Caso1(String d1, String d2, int linea, boolean transborde) {
         NodoDoble aux = this.getEstaciones(linea);
         while (aux != null) {
-            if (aux.dato.equals(d1)) {
+            if (aux.dato.equalsIgnoreCase(d1)) {
                 break;
             }
             aux = aux.siguiente;
@@ -348,7 +341,7 @@ public class OperacionesTransbordes {
             }
             obj.add(aux.dato);
 
-            if (aux.dato.equals(d2)) {
+            if (aux.dato.equalsIgnoreCase(d2)) {
                 break;
             }
 
@@ -371,16 +364,16 @@ public class OperacionesTransbordes {
         String medioPaso = this.Caso2(linea1, linea2, estacion1, estacion2);
         ArrayList<String> caminitoDeLaEscuela = this.Caso1(estacion1, medioPaso, linea1, false);
         caminitoDeLaEscuela.addAll(this.Caso1(medioPaso, estacion2, linea2, true));
-        System.out.println(caminitoDeLaEscuela);
-        System.out.println("llamar caso 2");
         return caminitoDeLaEscuela;
     }
 
-    public ArrayList<String> recursivo(int linea1, int linea2, String estacion1, String estacion2, int intentos) {
-        String medioPaso = this.Caso3(linea1, linea2, estacion1, estacion2, intentos, 0, null);
+    public ArrayList<Object> recursivo(int linea1, int linea2, String estacion1, String estacion2, int intentos) {
+        String medioPaso = this.Caso3(linea1, linea2, estacion1, estacion2, intentos, 0, null, 0);
+ 
         ArrayList<String> caminitoDeLaEscuela = this.Caso1(estacion1, medioPaso, linea1, false);
         caminitoDeLaEscuela.addAll(this.Caso1(medioPaso, estacion2, linea2, true));
-        return caminitoDeLaEscuela;
+        System.out.println(this.nombres);
+        return this.nombres;
     }
 
     public void caso2(int linea1, int linea2, String estacion1, String estacion2) {
@@ -405,5 +398,19 @@ public class OperacionesTransbordes {
         System.out.println("lo mejor fue");
         System.out.println(lomejorNombre);
 
+    }
+
+    public boolean isCase2(int linea1, int linea2) {
+        ArrayList<String> transbordes1 = this.getTrasbordesPorlinea(linea1);
+        ArrayList<String> transbordes2 = this.getTrasbordesPorlinea(linea2);
+
+        for (int i = 0; i < transbordes1.size(); i++) {
+            for (int j = 0; j < transbordes2.size(); j++) {
+                if (transbordes1.get(i).equalsIgnoreCase(transbordes2.get(j))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

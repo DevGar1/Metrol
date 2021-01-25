@@ -5,6 +5,9 @@
  */
 package listasdoblementeenlazadas;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  *
  * @author Abraham Arvizu;
@@ -237,8 +240,7 @@ public class Principal {
         linea6a.setEstaciones(listita);
         linea6b.setEstaciones(listita);
         linea6c.setEstaciones(listita);
-        
-        
+
         Estaciones Linea1 = new Estaciones();
         Estaciones Linea2 = new Estaciones();
         Estaciones Linea3 = new Estaciones();
@@ -490,8 +492,54 @@ public class Principal {
 
         linea11.setEstaciones(LineaA);
         OperacionesTransbordes operaciones = new OperacionesTransbordes(elRosario);
-        operaciones.recursivo(12, 8, "Tlahuac", "Aculco",2);
+        Scanner entradaString = new Scanner(System.in);
+        Scanner entradaEnteros = new Scanner(System.in);
+        int lineaInicio, lineaFinal;
+        String estacion1, estacion2;
+        operaciones.recursivo(8, 2, "constitucion de 1917", "hidalgo", 2);
 
+        System.out.println("---------------------------------¿A dónde vamos hoy?---------------------------------");
+        System.out.println("Ingresa linea de inicio");
+        lineaInicio = entradaEnteros.nextInt();
+        System.out.println("Ingresa Estacion de inicio");
+        estacion1 = entradaString.nextLine();
+        System.out.println("Ingresa linea deseada");
+        lineaFinal = entradaEnteros.nextInt();
+        System.out.println("Ingresa Estacion deseada");
+        estacion2 = entradaString.nextLine();
+        ArrayList<String> movimientos = new ArrayList();
+        if (lineaInicio == lineaFinal) {
+            System.out.println("¡No te preocupes, estas en la misma linea!");
+            movimientos = operaciones.Caso1(estacion1, estacion2, lineaInicio, false);
+
+        } else {
+            ArrayList<Object> obj = operaciones.recursivo(lineaInicio, lineaFinal, estacion1, estacion2, 2);
+            if (obj.size() == 3) {
+                movimientos = operaciones.Caso1(estacion1, (String) obj.get(1), lineaInicio, false);
+                ArrayList<String> aux = operaciones.Caso1((String) obj.get(1), (String) obj.get(2), lineaFinal, false);
+
+                for (int i = 0; i < aux.size(); i++) {
+                    movimientos.add(aux.get(i));
+                }
+
+            } else {
+                movimientos = operaciones.Caso1(estacion1, (String) obj.get(1), lineaInicio, false);
+                ArrayList<String> aux = operaciones.Caso1((String) obj.get(1), (String) obj.get(3), (int) obj.get(2), false);
+                for (int i = 0; i < aux.size(); i++) {
+                    movimientos.add(aux.get(i));
+                }
+                aux = operaciones.Caso1((String) obj.get(3), estacion2, lineaFinal, false);
+                for (int i = 0; i < aux.size(); i++) {
+                    movimientos.add(aux.get(i));
+                }
+            }
+
+        }
+        System.out.println("Sube al metro y vas a recorrer");
+        movimientos.forEach(dato -> {
+            System.out.println("--" + dato);
+        });
+        System.out.println("¡Has llegado!");
 
     }
 
