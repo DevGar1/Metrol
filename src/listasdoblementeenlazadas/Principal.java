@@ -237,6 +237,8 @@ public class Principal {
         linea6a.setEstaciones(listita);
         linea6b.setEstaciones(listita);
         linea6c.setEstaciones(listita);
+        
+        
         Estaciones Linea1 = new Estaciones();
         Estaciones Linea2 = new Estaciones();
         Estaciones Linea3 = new Estaciones();
@@ -488,8 +490,8 @@ public class Principal {
 
         linea11.setEstaciones(LineaA);
         OperacionesTransbordes operaciones = new OperacionesTransbordes(elRosario);
-        operaciones.llamarCaso2(4, 10, "Martin Carrera", "San Lazaro");
-        // operaciones.mostrarTransbordes();
+        operaciones.recursivo(2, 6, "revolucion", "la villa",3);
+       // operaciones.mostrarTransbordes();
 //        
 //        
         //   operaciones.distanciaATransbordes(8, "Aculco");
@@ -500,6 +502,12 @@ public class Principal {
 //
 //        int hola = listita.DistanciaNodos("Vallejo", "MartinCarrera");
 //        System.out.println(hola);
+
+
+
+
+
+
     }
 
 }
