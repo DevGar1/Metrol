@@ -123,13 +123,6 @@ public class OperacionesTransbordes {
         return transb;
     }
 
-//    public void distanciaATransbordes(int linea, String a) {
-//        NodoDoble estaciones = this.getEstaciones(linea);
-//        ArrayList<String> trans = this.getTrasbordesPorlinea(linea);
-//        trans.forEach(dato -> {
-//            System.out.println(this.DistanciaNodos(a, dato, estaciones) - 1);
-//        });
-//    }
     public ArrayList<Object> existeTransborde(NodoDoble estaciones, ArrayList<String> transbordesDestino) { /// chabacno -> transbordes destino   tacuba,chabano,bellas artes
 
         int distancia = 1000;
@@ -195,7 +188,6 @@ public class OperacionesTransbordes {
                 if ((int) obj.get(1) < (int) objetos.get(1)) {
                     objetos.set(1, obj.get(1));
                     objetos.set(0, obj.get(0));
-
                 }
 
             }
@@ -217,7 +209,7 @@ public class OperacionesTransbordes {
         return lineasPosibles;
     }
 
-    public String Caso3(int lineaBase, int lineaLlegada, String salida, String estacionLlegada, int intentos, int valorActual) {
+    public String Caso3(int lineaBase, int lineaLlegada, String salida, String estacionLlegada, int intentos, int valorActual, String tSalida) {
         System.out.println("----------------------------------------------------------------------------------------------------");
         ArrayList<String> transbordesa = this.getTrasbordesPorlinea(lineaBase);// tenemos
         ArrayList<String> transbordesb = this.getTrasbordesPorlinea(lineaLlegada);// necesitamos
@@ -226,172 +218,53 @@ public class OperacionesTransbordes {
         if (intentos < 1) {
             return null;
         }
-        if (lineaBase == lineaLlegada) {
-//            int segundo = this.Caso1Numero(salida, estacionLlegada, lineaBase, false);
-//            this.nombres.set(0, (int) this.nombres.get(0) + segundo);
-//            this.nombres.set(0, (int) this.nombres.get(0) - 1);
-//            this.nombres.add(estacionLlegada);
 
-        } else {
+        for (int i = 0; i < transbordesa.size(); i++) {
+            Transbordes transborde = this.getTansborde(transbordesa.get(i));// regla 2
+            ArrayList<Lineas> lineas = this.getLineas(transborde);// estas en la 3
+            boolean esCaso2 = false;
+            for (int j = 0; j < lineas.size(); j++) {
 
-            for (int i = 0; i < transbordesa.size(); i++) {
-                Transbordes transborde = this.getTansborde(transbordesa.get(i));// regla 2
-                ArrayList<Lineas> lineas = this.getLineas(transborde);// estas en la 3
-                boolean esCaso2 = false;
-                for (int j = 0; j < lineas.size(); j++) {
+                if (lineas.get(j).getNlinea() == lineaLlegada) {
+                    ArrayList<String> camino = this.llamarCaso2(lineaBase, lineaLlegada, salida, estacionLlegada);
+                    int tam = camino.size() - 4;
 
-                    if (lineas.get(j).getNlinea() == lineaLlegada) {
-                        ArrayList<String> camino = this.llamarCaso2(lineaBase, lineaLlegada, salida, estacionLlegada);
-                        int tam = camino.size() - 4;
-
-                        tam = tam + valorActual;
-                        if ((int) this.nombres.get(0) > tam) {
-                            this.nombres.clear();
-                            this.distancia = tam;
-                            this.nombres.add(this.distancia);
-                            this.nombres.add(transborde.NombreEstacion);
-                            this.nombres.add(estacionLlegada);
+                    tam = tam + valorActual;
+                    if ((int) this.nombres.get(0) > tam) {
+                        this.nombres.clear();
+                        this.distancia = tam;
+                        this.nombres.add(this.distancia);
+                        if (tSalida != null) {
+                            this.nombres.add(tSalida);
                         }
-                        System.out.println(this.nombres);
-                        esCaso2 = true;
-                        return "hola";
+                        this.nombres.add(transborde.NombreEstacion);
+                        this.nombres.add(estacionLlegada);
                     }
+                    System.out.println(this.nombres);
+                    esCaso2 = true;
+                    return "Final";
                 }
-                if (!esCaso2) {
-                    for (int j = 0; j < lineas.size(); j++) {
-                        if (lineas.get(j).getNlinea() != lineaBase) {
-                            int a = this.DistanciaNodos(salida, transborde.getNombreEstacion(), this.getEstaciones(lineaBase));
-                            String res = this.Caso3(lineas.get(j).getNlinea(), lineaLlegada, transborde.getNombreEstacion(), estacionLlegada, intentos - 1, a);
-                            if (res != null) {
-                                System.out.println("Es algo");
+            }
+            if (!esCaso2) {
+                for (int j = 0; j < lineas.size(); j++) {
+                    if (lineas.get(j).getNlinea() != lineaBase) {
+                        int a = this.DistanciaNodos(salida, transborde.getNombreEstacion(), this.getEstaciones(lineaBase));
+                        String res = this.Caso3(lineas.get(j).getNlinea(),
+                                lineaLlegada, transborde.getNombreEstacion(),
+                                estacionLlegada, intentos - 1, a, transborde.getNombreEstacion());
+                        if (res != null) {
+                            System.out.println("Es algo");
 
-                            }
                         }
                     }
                 }
 
             }
-
-//            boolean flag = false;
-//            if (intentos > 0) {
-//                for (int i = 0; i < transbordesa.size(); i++) {
-//                    for (int j = 0; j < transbordesb.size(); j++) {
-//                        if (transbordesa.get(i).equalsIgnoreCase(transbordesb.get(j))) {
-//                            opciones.add(transbordesa.get(i));
-//
-//                            flag = true;
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//
-//            if (flag == true) {
-//                Transbordes aux = this.transbordes;
-//                //opciones tenemos cuales cumplen caso 2
-//                for (int i = 0; i < opciones.size(); i++) {
-//
-//                    while (aux != null) {
-//                        if (aux.getNombreEstacion().equalsIgnoreCase(opciones.get(i))) {
-//
-//                            int distancias = this.Caso1Numero(salida, aux.getNombreEstacion(), lineaBase, false);
-//
-//                            if ((int) this.nombres.get(0) == 100) {
-//                                this.nombres.set(0, distancias);
-//                                this.nombres.add(aux.getNombreEstacion());
-//
-//                            } else {
-//
-//                                this.nombres.set(0, (int) this.nombres.get(0) + distancia);
-//                            }
-//                            Lineas linea = aux.getLinea();
-//                            while (linea != null) {
-//                                if (linea.getNlinea() != lineaBase) {
-//                                    Caso3(linea.getNlinea(), lineaLlegada, aux.getNombreEstacion(), estacionLlegada, intentos - 1);
-//                                }
-//                                linea = linea.getLineaSiguiente();
-//                            }
-//                        }
-//                        aux = aux.sig;
-//                    }
-//                }
-//
-//            } else {
-//                System.out.println("mira");
-//            }
         }
         System.out.println("lo mejor fuie");
         System.out.println(this.nombres);
         return null;
     }
-    //    public String Caso3(int lineaBase, int lineaLlegada, String salida, String estacionLlegada, int intentos) {
-    //        ArrayList<String> transbordesa = this.getTrasbordesPorlinea(lineaBase);// tenemos
-    //        ArrayList<String> transbordesb = this.getTrasbordesPorlinea(lineaLlegada);// necesitamos
-    //        Set<String> hashSet;
-    //        String nombreM = null;
-    //        System.out.println("Esta linea es la");
-    //        System.out.println(lineaBase);
-    //        ArrayList<String> opciones = new ArrayList();
-    //        
-    //        if (intentos > 0) {
-    //            boolean flag = false;
-    //            for (int i = 0; i < transbordesa.size(); i++) {
-    //                for (int j = 0; j < transbordesb.size(); j++) {
-    //                    if (transbordesa.get(i) == transbordesb.get(j)) {
-    //                        System.out.println(transbordesa.get(i));
-    //                        opciones.add(transbordesa.get(i));
-    //                        flag = true;
-    //                        break;
-    //                    }
-    //                }
-    //                System.out.println(transbordesa.get(i));
-    //                
-    //            }
-    //            
-    //            if (flag && intentos < 1) {
-    //                int mejor = 1000;
-    //                nombreM = null;
-    //                Transbordes aux = this.transbordes;
-    //                for (int i = 0; i < opciones.size(); i++) {
-    //                    
-    //                    int distancia = this.DistanciaNodos(salida, opciones.get(i), this.getEstaciones(lineaBase));
-    //                    if (distancia < mejor) {
-    //                        mejor = distancia;
-    //                        nombreM = opciones.get(i);
-    //                        this.nombres.add(nombreM);
-    //                    }
-    //                }
-    //            } else {
-    //                Transbordes aux = this.transbordes;
-    //                ArrayList<String> transbordes = this.getTrasbordesPorlinea(lineaBase);
-    //                for (int i = 0; i < 10; i++) {
-    //                    while (aux != null) {
-    //                        if (aux.getNombreEstacion() == aux.getNombreEstacion()) {
-    //                            Lineas linea = aux.getLinea();
-    //                            while (linea != null) {
-    //                                if (linea.getNlinea() != lineaBase) {
-    //                                    String resultados = this.Caso3(linea.getNlinea(), lineaLlegada, aux.getNombreEstacion(), estacionLlegada, intentos - 1);
-    //                                    if (resultados != null) {
-    //                                        nombres.add(resultados);
-    //                                    }
-    //                                    hashSet = new HashSet<String>(nombres);
-    //                                    nombres.clear();
-    //                                    nombres.addAll(hashSet);
-    //                                    
-    //                                }
-    //                                linea = linea.getLineaSiguiente();
-    //                            }
-    //                        }
-    //                        aux = aux.sig;
-    //                    }
-    //                }
-    //            }
-    //            
-    //        }
-    //        System.out.println(nombres);
-    //        return nombreM;
-    //    }
-    //    
 
     public String Caso2(int lineaBase, int lineaLlegada, String salida, String estacionLlegada) {
         ArrayList<String> transbordesa = this.getTrasbordesPorlinea(lineaBase);// tenemos
@@ -504,7 +377,7 @@ public class OperacionesTransbordes {
     }
 
     public ArrayList<String> recursivo(int linea1, int linea2, String estacion1, String estacion2, int intentos) {
-        String medioPaso = this.Caso3(linea1, linea2, estacion1, estacion2, intentos, 0);
+        String medioPaso = this.Caso3(linea1, linea2, estacion1, estacion2, intentos, 0, null);
         ArrayList<String> caminitoDeLaEscuela = this.Caso1(estacion1, medioPaso, linea1, false);
         caminitoDeLaEscuela.addAll(this.Caso1(medioPaso, estacion2, linea2, true));
         return caminitoDeLaEscuela;

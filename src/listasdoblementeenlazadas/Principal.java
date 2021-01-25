@@ -490,22 +490,7 @@ public class Principal {
 
         linea11.setEstaciones(LineaA);
         OperacionesTransbordes operaciones = new OperacionesTransbordes(elRosario);
-        operaciones.recursivo(8, 5, "Constitucion de 1917", "La Raza",2);
-       // operaciones.mostrarTransbordes();
-//        
-//        
-        //   operaciones.distanciaATransbordes(8, "Aculco");
-
-//
-//          listita.mostrarDatos();
-//        Lineas lis = new Lineas();
-//
-//        int hola = listita.DistanciaNodos("Vallejo", "MartinCarrera");
-//        System.out.println(hola);
-
-
-
-
+        operaciones.recursivo(12, 8, "Tlahuac", "Aculco",2);
 
 
     }
